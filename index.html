@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>gesture-test</title>
+    <meta name="viewport" content="width = device-width,initial-scale=1.0,user-scalable=0">
+</head>
+<style type="text/css">
+    html,body{
+        width:100%;
+        height:auto;
+        overflow: hidden;
+        padding: 0;
+        margin:0;
+    }
+    .bodyBox{
+        width:calc(100% + 100px);
+        display:block;
+        height:40px;
+        border-top:1px rgba(29, 29, 29, 0.21) solid;
+        border-bottom:1px rgba(29, 29, 29, 0.21) solid;
+        overflow: hidden;
+        font-size:0;
+    }
+    .msgBox{
+        width:100%;
+        height:100%;
+        overflow: hidden;
+        display:block;
+    }
+    .mmBox{
+        width:calc(100% - 100px);
+        height:100%;
+        background: #3498DB;
+        display: inline-block;
+    }
+    .otherBox{
+        width:100px;
+        height:100%;
+        background: red;
+        display: inline-block;
+    }
+    .upBox{
+        width:100%;
+        height: 300px;
+        margin-top: 40px;
+        border: 1px #000 solid;
+        overflow: hidden;
+    }
+    .upBox ul{
+        width:100%;
+        height: auto;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    .upBox ul li{
+        width:100%;
+        height: 50px;
+        border-bottom: 1px #cccccc solid ;
+        display: block;
+    }
+</style>
+<body>
+    <p>left and right</p>
+    <div class="bodyBox">
+        <div class="msgBox" id="tests">
+            <div class="mmBox"></div>
+            <div class="otherBox"></div>
+        </div>
+    </div>
+<!---->
+    <p>up and down</p>
+    <div class="upBox">
+        <ul id="test1">
+        </ul>
+    </div>
+</body>
+<script src="js/base-gesture.js"></script>
+<script>
+    var test1 = document.getElementById("tests");
+    var action = null;//记录操作
+    var t = new gesture('#tests',{
+        swipeLeft: function (event) {
+            event.preventDefault();
+            // event.moveX 距离起始位置的距离
+            // event.gapX 距离上一次滑动的距离
+            var mT = Number(test1.style.marginLeft.replace(/[px]/ig,''));
+            var ls = mT - event.gapX;
+            if(Math.abs(ls)<=100){
+                test1.style.marginLeft = ls+"px";
+            }
+            action = 'left';
+        },
+        swipeRight: function (event) {
+            event.preventDefault();
+            var mT = Number(test1.style.marginLeft.replace(/[px]/ig,''));
+            var ls = mT + event.gapX;
+            if(ls<=0){
+                test1.style.marginLeft = ls+"px";
+            }
+            action = 'right';
+        },
+        end: function () {
+            var mT = Number(test1.style.marginLeft.replace(/[px]/ig,''));
+            var ls = mT;
+            switch(action){
+                case 'left':
+                    if(Math.abs(mT) < 100){
+                        var it = setInterval(function () {
+                            ls = ls-10;
+                            if(ls>=-100){
+                                test1.style.marginLeft = ls+"px";
+                            }else{
+                                test1.style.marginLeft = '-100px';
+                                clearInterval(it);
+                            }
+                        },10);
+                    }
+                    break;
+                case 'right':
+                    if(mT<0){
+                        var t = setInterval(function () {
+                            ls = ls*1+10;
+                            if(ls<=0){
+                                test1.style.marginLeft = ls+"px";
+                            }else{
+                                test1.style.marginLeft = '0px';
+                                clearInterval(t);
+                            }
+                        },10);
+                        test1.style.marginLeft = '0px';
+                    }
+                    break;
+            }
+        }
+    });
+    //up and down
+    var t1 = document.getElementById('test1');
+    for(var i=0;i<10;i++){
+        var li =document.createElement('li');
+        li.innerHTML=' '+i;
+        t1.appendChild(li);
+    }
+    var height = document.defaultView.getComputedStyle(t1,null).height.replace(/[px]/,'');
+    var MH = height - 300;//距离差
+    //console.log(height);
+    var tb = new gesture('#test1',{
+        swipeUp:function (event) {
+            var mT = Number(t1.style.marginTop.replace(/[px]/ig,''));
+            var ls = mT - event.gapY;
+            t1.style.marginTop = ls+"px";
+        },
+        swipeDown:function (event) {
+            var mT = Number(t1.style.marginTop.replace(/[px]/ig,''));
+            var ls = mT + event.gapY;
+            t1.style.marginTop = ls+"px";
+        }
+    });
+    //
+</script>
+</html>
