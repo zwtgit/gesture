@@ -36,5 +36,5 @@ var t= new gesture('#tests',{<br>
   });<br>
   ....<br>
   # DEMO<br>
-  base test: [demo](http://www.home610.cn/demo/touch/index.html)<br>
-  demo: [demo](http://www.home610.cn/demo/touch/demo.html)
+  base test: [demo](http://home610.cn/demo/touch/index.html)<br>
+  demo: [demo](http://home610.cn/demo/touch/demo.html)
