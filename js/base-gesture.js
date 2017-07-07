@@ -226,7 +226,7 @@
                 endY = event.clientY;
             }
             endDate = new Date();
-            if (Math.abs(endX - compareX ) > 2 || Math.abs(endY- compareY ) > 2) { // 非点击事件
+            if ((Math.abs(endX - compareX ) > 2 || Math.abs(endY- compareY ) > 2) && cont.MOUSEAC) { // 非点击事件
                 var angle = getAngle({x: endX, y: endY},{x: compareX, y: compareY});
                 var dx = endX - compareX,
                     dy = endY - compareY;
