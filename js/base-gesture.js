@@ -54,11 +54,11 @@
     gesture.prototype = {
         // click
         click: function (fn) {
-            if (this.count.TYPE === 'node') {
-                hander.addhander(this.count.DOM, 'click', fn,this.cont);
-            }else if(this.count.TYPE === 'nodeList') {
-                for (var i = 0; i < this.count.DOM.length; i++ ) {
-                    hander.addhander(this.count.DOM.item(i), 'click', fn, this.cont);
+            if (this.cont.TYPE === 'node') {
+                hander.addhander(this.cont.DOM, 'click', fn,this.cont);
+            }else if(this.cont.TYPE === 'nodeList') {
+                for (var i = 0; i < this.cont.DOM.length; i++ ) {
+                    hander.addhander(this.cont.DOM.item(i), 'click', fn, this.cont);
                 }
             } // more
         },
