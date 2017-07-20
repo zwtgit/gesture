@@ -4,6 +4,8 @@ javascript gesture plugin<br>
 支持:click,tap,swipeLeft,swiptRight,swipeUp,swipeDown.<br>
 # 导入<br>
 <script src="base-gesture.js"><script>  or  import gesture from './base-gesture.js'<br>
+or<br>
+npm install base-gesture.js
 # 使用
 <br>//参数说明: 第一个参数传入id,class,标签名等,与jquery的相似，不过暂时不支持，多级选择器。例如:('ul li')。第二个参数，设定手势操作，相应方法<br>
 var t= new gesture('#tests',{<br>
