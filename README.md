@@ -7,8 +7,8 @@ Introduction
     可实时判断手势的变化，并调用相应回调函数。
 ## import
     <script src="base-gesture.js"><script>
-    <br>or<br>
-    npm install base-gesture<br>
+    or
+    npm install base-gesture
 ## use
     可传入id选择器,类选择器，元素选择器，以及节点对象等参数。
     new gesture('#dom',{
@@ -34,8 +34,8 @@ Introduction
     event.gapX 表示每次在X轴上的移动距离。触发频率与touchmove和mousemove一致
     event.moveX 表示距离手势操作开始位置的X轴上的距离
 ## demo
-    [demo1](http://www.home610.cn/demo/gesture/index.html)
-    [demo1](http://www.home610.cn/demo/gesture/demo.html)
+   [demo1](http://www.home610.cn/demo/gesture/index.html)
+   [demo1](http://www.home610.cn/demo/gesture/demo.html)
     
     
 
