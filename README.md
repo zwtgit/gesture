@@ -34,8 +34,8 @@ Introduction
     event.gapX 表示每次在X轴上的移动距离。触发频率与touchmove和mousemove一致
     event.moveX 表示距离手势操作开始位置的X轴上的距离
 ## demo
-   [demo1](http://www.home610.cn/demo/gesture/index.html)
-   [demo1](http://www.home610.cn/demo/gesture/demo.html)
+   [demo1](http://www.home610.cn/demo/touch/index.html)<br>
+   [demo1](http://www.home610.cn/demo/touch/demo.html)
     
     
 
