@@ -113,7 +113,10 @@
             addListener(element,'mousedown','mousemove','mouseup',cont)
         }
     };
-    //private function
+    /*
+    * private function
+    * ********************************
+    * */
     function setHandler(fn,cont) {
         if (cont.TYPE == 'node') { // is node
             if ( !cont.INIT ) {
@@ -137,7 +140,8 @@
         } else if (typeof select == "string") {//为字符串
             var cdom = select.split(" ");
             if(cdom.length > 1){
-                return;
+                cont.DOM = getHierarchy(cdom);
+                cont.TYPE = 'nodeList';
             } else if (select.charAt(0) == "#"){//为id
                 cont.DOM = document.getElementById(select.slice(1));
                 cont.TYPE = 'node';
@@ -149,6 +153,46 @@
                 cont.TYPE = 'nodeList';
             }
         }//
+    }
+    // 获得层级的元素
+    function getHierarchy(dom) {
+        var len = dom.length;
+        var lsDom = [0];
+        for (var i = 0; i < len; i++) {
+            var ls = [];
+            for (var j = 0; j < lsDom.length; j++) {
+                var c;
+                if (i == 0) {
+                    c = ancillary(document,dom[i]);
+                } else {
+                    c = ancillary(lsDom[j],dom[i]);
+                }
+                if (c.TYPE == 'node') {
+                    ls.push(c.DOM);
+                } else {
+                    for (var x = 0; x < c.DOM.length; x++) {
+                        ls.push(c.DOM[x]);
+                    }
+                }
+            }
+            lsDom = ls;
+        }
+        return lsDom;
+    }
+    // 辅助获取dom
+    function ancillary(father,select) {
+        var cont = {};
+        if (select.charAt(0) == "#"){//为id
+            cont.DOM = document.getElementById(select.slice(1));
+            cont.TYPE = 'node';
+        } else if (select.charAt(0) == ".") {
+            cont.DOM = father.getElementsByClassName(select.slice(1));
+            cont.TYPE = 'nodeList';
+        } else {
+            cont.DOM = father.getElementsByTagName(select);
+            cont.TYPE = 'nodeList';
+        }
+        return cont;
     }
     // 获取夹角
     function getAngle (start, end) {
@@ -318,15 +362,18 @@
             endX = endY = startX = startY =compareY = compareX = 0;
         });
     }
-
+/**
+ *
+ * ******向外提供接口****************
+ * */
     /******/
     if (typeof exports === 'object' && typeof module !== 'undefined' ) {
         module.exoprts = gesture;
-    };
+    }
     if (typeof define == 'function') {
         define(function () {
             return gesture;
         });
-    };
+    }
     global.gesture = gesture;
 })(this);
