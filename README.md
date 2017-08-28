@@ -9,7 +9,7 @@ base-gesture.js
     or
     npm install base-gesture
 ## use
-        //参数可传入id选择器，类选择器，元素选择器，以及dom对象
+        //参数可传入id选择器，类选择器，元素选择器，层级选择器例如:('#test ul li') 以及dom对象
         new gesture('#dom',{
                 click: function(event){},
                 tap: function(event) {}, 
